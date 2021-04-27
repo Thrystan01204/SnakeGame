@@ -1,6 +1,7 @@
 package com.example.snakegame;
 
 import android.graphics.Bitmap;
+import android.graphics.Rect;
 
 /**
  * Created by <VOTRE-NOM> on <DATE-DU-JOUR>.

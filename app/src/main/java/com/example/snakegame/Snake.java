@@ -1,6 +1,7 @@
 package com.example.snakegame;
 
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 
 import java.util.ArrayList;
 
@@ -39,9 +40,14 @@ public class Snake {
         for (int i = 1; i < length-1; i++) {
             arrPartSnake.add(new PartSnake(bm_body_horizontal,arrPartSnake.get(i-1).getX()-GameView.sizeOfMap, y));
         }
-        arrPartSnake.add(new PartSnake(bm_tail_right,arrPartSnake.get(length-2).getX()-GameView.sizeOfMap, y ))
+        arrPartSnake.add(new PartSnake(bm_tail_right,arrPartSnake.get(length-2).getX()-GameView.sizeOfMap, y ));
     }
 
+    public void draw(Canvas canvas){
+        for (int i = 0; i < length ; i++) {
+            canvas.drawBitmap(arrPartSnake.get(i).getBm(),arrPartSnake.get(i).getX(),arrPartSnake.get(i).getY(),null);
+        }
+    }
     public Bitmap getBm() {
         return bm;
     }
@@ -138,20 +144,20 @@ public class Snake {
         this.bm_tail_left = bm_tail_left;
     }
 
-    public Bitmap getBm_tail() {
-        return bm_tail;
+    public Bitmap getBm_tail_right() {
+        return bm_tail_right;
     }
 
-    public void setBm_tail(Bitmap bm_tail) {
-        this.bm_tail = bm_tail;
+    public void setBm_tail_right(Bitmap bm_tail_right) {
+        this.bm_tail_right = bm_tail_right;
     }
 
-    public Bitmap getUp() {
-        return up;
+    public Bitmap getBm_tail_up() {
+        return bm_tail_up;
     }
 
-    public void setUp(Bitmap up) {
-        this.up = up;
+    public void setBm_tail_up(Bitmap bm_tail_up) {
+        this.bm_tail_up = bm_tail_up;
     }
 
     public Bitmap getBm_tail_down() {
