@@ -1,6 +1,7 @@
 package com.example.snakegame;
 
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Rect;
 
 public class Apple {
@@ -12,6 +13,15 @@ public class Apple {
         this.bm = bm;
         this.x = x;
         this.y = y;
+    }
+
+    public void draw(Canvas canvas){
+        canvas.drawBitmap(bm, x, y, null);
+    }
+
+    public void reset(int nx, int ny){
+        this.x = nx;
+        this.y = ny;
     }
 
     public Bitmap getBm() {
@@ -39,7 +49,7 @@ public class Apple {
     }
 
     public Rect getR() {
-        return new Rect(this.x, this.y, this.x+GameView.sizeOfMap, this.y+GameView.sizeOfMap);
+        return new Rect(this.x, this.y, this.x+GameView.sizeElementMap, this.y+GameView.sizeElementMap);
     }
 
     public void setR(Rect r) {

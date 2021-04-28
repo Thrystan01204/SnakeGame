@@ -42,16 +42,8 @@ public class PartSnake {
         this.y = y;
     }
 
-    public Rect getrBody() {
-        return new Rect(this.x, this.y, this.x+GameView.sizeOfMap, this.y+GameView.sizeOfMap);
-    }
-
-    public void setrBody(Rect rBody) {
-        this.rBody = rBody;
-    }
-
     public Rect getrTop() {
-        return new Rect(this.x, this.y-10*Constants.SCREEN_HEIGHT/1920, this.x+GameView.sizeOfMap, this.y+GameView.sizeOfMap);
+        return new Rect(this.x, this.y-10*Constants.SCREEN_HEIGHT/1920, this.x+GameView.sizeElementMap, this.y);
     }
 
     public void setrTop(Rect rTop) {
@@ -59,7 +51,7 @@ public class PartSnake {
     }
 
     public Rect getrBottom() {
-        return new Rect(this.x, this.y, this.x+GameView.sizeOfMap, this.y+GameView.sizeOfMap+10*Constants.SCREEN_HEIGHT/1920);
+        return new Rect(this.x, this.y + GameView.sizeElementMap, this.x + GameView.sizeElementMap, this.y + GameView.sizeElementMap+10*Constants.SCREEN_HEIGHT/1920);
     }
 
     public void setrBottom(Rect rBottom) {
@@ -67,7 +59,7 @@ public class PartSnake {
     }
 
     public Rect getrRight() {
-        return new Rect(this.x+GameView.sizeOfMap, this.y, this.x+GameView.sizeOfMap+10*Constants.SCREEN_WIDTH/1080, this.y+GameView.sizeOfMap);
+        return new Rect(this.x + GameView.sizeElementMap, this.y, this.x + GameView.sizeElementMap+10*Constants.SCREEN_WIDTH/1080, this.y+GameView.sizeElementMap);
     }
 
     public void setrRight(Rect rRight) {
@@ -75,10 +67,18 @@ public class PartSnake {
     }
 
     public Rect getrLeft() {
-        return new Rect(this.x-10*Constants.SCREEN_WIDTH/1080, this.y, this.x   , this.y+GameView.sizeOfMap);
+        return new Rect(this.x - 10*Constants.SCREEN_WIDTH/1080, this.y, this.x, this.y + GameView.sizeElementMap);
     }
 
     public void setrLeft(Rect rLeft) {
         this.rLeft = rLeft;
+    }
+
+    public Rect getrBody() {
+        return new Rect(this.x, this.y, this.x + GameView.sizeElementMap, this.y + GameView.sizeElementMap);
+    }
+
+    public void setrBody(Rect rBody) {
+        this.rBody = rBody;
     }
 }

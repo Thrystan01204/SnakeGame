@@ -1,70 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+<RelativeLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <com.example.snakegame.GameView
         android:id="@+id/gv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-
     <LinearLayout
+        android:background="#0C2200"
         android:layout_width="match_parent"
         android:layout_height="75dp"
-        android:background="#102B00"
-        android:alpha="0.8"
-        android:layout_alignParentBottom="true"
         android:orientation="horizontal"
-        android:weightSum="2">
+        android:weightSum="2"
+        android:layout_alignParentBottom="true"
+        android:alpha="0.8">
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:layout_gravity="center">
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_centerInParent="true">
+                android:layout_centerInParent="true"
+                android:orientation="horizontal">
                 <ImageView
-                    android:src="@drawable/apple"
+                    android:id="@+id/img_apple"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:scaleType="fitXY"/>
+                    android:src="@drawable/apple"
+                    android:scaleType="fitXY" />
                 <TextView
                     android:id="@+id/txt_score"
-                    android:textColor="#ffffff"
-                    android:textSize="30sp"
-                    android:text=" x 0"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:text="x 0"
+                    android:textSize="30sp"/>
             </LinearLayout>
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:layout_gravity="center">
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_centerInParent="true">
+                android:layout_centerInParent="true"
+                android:orientation="horizontal">
                 <ImageView
-                    android:src="@drawable/ic_baseline_emoji_events_24"
-                    app:tint="#FFEB3B"
+                    android:id="@+id/img_cup"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:scaleType="fitXY"/>
+                    android:src="@drawable/ic_baseline_emoji_events_24"
+                    android:scaleType="fitXY"
+                    app:tint="#fff0"/>
                 <TextView
                     android:id="@+id/txt_best_score"
-                    android:textColor="#ffffff"
-                    android:textSize="30sp"
-                    android:text=" x 0"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:text="x 0"
+                    android:textSize="30sp"/>
             </LinearLayout>
         </RelativeLayout>
     </LinearLayout>
-
+    <ImageView
+        android:id="@+id/img_swipe"
+        android:visibility="invisible"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/swipe"
+        android:scaleType="fitXY"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
 </RelativeLayout>
