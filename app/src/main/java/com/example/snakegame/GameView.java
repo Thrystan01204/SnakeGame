@@ -221,11 +221,10 @@ public class GameView extends View {
         //Lorsque le serpent passe sur un stop, gameover
         if(snake.getArrPartSnake().get(0).getrBody().intersect(stop.getR())){
             //son de mort a ajouter
-            /*if(loadedsound){
-                int streamId = this.soundPool.play(this.soundEat, (float)0.5, (float)0.5, 1, 0, 1f);
-            }*/
-            stop.reset(arrGrass.get(objectPlacementRandom()[0]).getX(), arrGrass.get(objectPlacementRandom()[1]).getY());
-
+            if(loadedsound){
+                int streamId = this.soundPool.play(this.soundDie, (float)0.5, (float)0.5, 1, 0, 1f);
+            }
+            gameOver();
         }
 
     }
