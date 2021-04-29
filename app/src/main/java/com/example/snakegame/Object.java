@@ -4,12 +4,12 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 
-public class Apple {
+public class Object {
     private Bitmap bm;
     private int x, y;
     private Rect r;
 
-    public Apple(Bitmap bm, int x, int y) {
+    public Object(Bitmap bm, int x, int y) {
         this.bm = bm;
         this.x = x;
         this.y = y;

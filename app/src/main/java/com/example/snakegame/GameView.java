@@ -1,3 +1,4 @@
+
 package com.example.snakegame;
 
 import android.content.Context;
@@ -19,15 +20,15 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.logging.LogRecord;
 
 public class GameView extends View {
-    private Bitmap bmGrass1, bmGrass2, bmSnake1, bmApple;
+    private Bitmap bmGrass1, bmGrass2, bmSnake1, bmApple, bmStop;
     private ArrayList<Grass> arrGrass = new ArrayList<>();
     private int w = 12, h=21;
     public static int sizeElementMap = 75*Constants.SCREEN_WIDTH/1080;
     private Snake snake;
-    private Apple apple;
+    private Object apple;
+    private Object stop;
     private Handler handler;
     private Runnable r;
     private boolean move = false;
@@ -53,8 +54,11 @@ public class GameView extends View {
         bmGrass2 = Bitmap.createScaledBitmap(bmGrass2, sizeElementMap, sizeElementMap, true);
         bmSnake1 = BitmapFactory.decodeResource(this.getResources(), R.drawable.snake1);
         bmSnake1 = Bitmap.createScaledBitmap(bmSnake1, 14*sizeElementMap, sizeElementMap, true);
-        bmApple = BitmapFactory.decodeResource(this.getResources(), R.drawable.apple);
+        bmApple = BitmapFactory.decodeResource(this.getResources(), R.drawable.ze_pom);
         bmApple = Bitmap.createScaledBitmap(bmApple, sizeElementMap, sizeElementMap, true);
+        bmStop = BitmapFactory.decodeResource(this.getResources(), R.drawable.stop);
+        bmStop = Bitmap.createScaledBitmap(bmStop, sizeElementMap, sizeElementMap, true);
+
         for(int i = 0; i < h; i++){
             for (int j = 0; j < w; j++){
                 if((j+i)%2==0){
@@ -65,7 +69,8 @@ public class GameView extends View {
             }
         }
         snake = new Snake(bmSnake1,arrGrass.get(126).getX(),arrGrass.get(126).getY(), 4);
-        apple = new Apple(bmApple, arrGrass.get(randomApple()[0]).getX(), arrGrass.get(randomApple()[1]).getY());
+        apple = new Object(bmApple, arrGrass.get(objectPlacementRandom()[0]).getX(), arrGrass.get(objectPlacementRandom()[1]).getY());
+        stop = new Object(bmStop, arrGrass.get(objectPlacementRandom()[0]).getX(), arrGrass.get(objectPlacementRandom()[1]).getY());
         handler = new Handler();
         r = new Runnable() {
             @Override
@@ -94,7 +99,8 @@ public class GameView extends View {
         soundDie = this.soundPool.load(context, R.raw.die, 1);
     }
 
-    private int[] randomApple(){
+
+    private int[] objectPlacementRandom(){
         int []xy = new int[2];
         Random r = new Random();
         xy[0] = r.nextInt(arrGrass.size()-1);
@@ -114,13 +120,13 @@ public class GameView extends View {
         }
         return xy;
     }
-
+    //We detectation the moment when 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         int a = event.getActionMasked();
         switch (a){
             case  MotionEvent.ACTION_MOVE:{
-                if(move==false){
+                if(!move){
                     mx = event.getX();
                     my = event.getY();
                     move = true;
@@ -190,14 +196,17 @@ public class GameView extends View {
         }
         snake.drawSnake(canvas);
         apple.draw(canvas);
+        stop.draw(canvas);
+        //When snake reach apple, load sound and add part + score
         if(snake.getArrPartSnake().get(0).getrBody().intersect(apple.getR())){
             if(loadedsound){
                 int streamId = this.soundPool.play(this.soundEat, (float)0.5, (float)0.5, 1, 0, 1f);
             }
-            apple.reset(arrGrass.get(randomApple()[0]).getX(), arrGrass.get(randomApple()[1]).getY());
+            apple.reset(arrGrass.get(objectPlacementRandom()[0]).getX(), arrGrass.get(objectPlacementRandom()[1]).getY());
             snake.addPart();
             score++;
             MainActivity.txt_score.setText(score+"");
+            //Update du bestScore
             if(score > bestScore){
                 bestScore = score;
                 SharedPreferences sp = context.getSharedPreferences("gamesetting", Context.MODE_PRIVATE);
@@ -208,9 +217,20 @@ public class GameView extends View {
             }
         }
         handler.postDelayed(r, 100);
+
+        //Lorsque le serpent passe sur un stop, gameover
+        if(snake.getArrPartSnake().get(0).getrBody().intersect(stop.getR())){
+            //son de mort a ajouter
+            /*if(loadedsound){
+                int streamId = this.soundPool.play(this.soundEat, (float)0.5, (float)0.5, 1, 0, 1f);
+            }*/
+            stop.reset(arrGrass.get(objectPlacementRandom()[0]).getX(), arrGrass.get(objectPlacementRandom()[1]).getY());
+
+        }
+
     }
 
-    // On arrête le jeu
+    // On arrête le jeu when gameover reached and we load sound
     private void gameOver() {
         isPlaying = false;
         MainActivity.dialogScore.show();
@@ -232,7 +252,7 @@ public class GameView extends View {
             }
         }
         snake = new Snake(bmSnake1,arrGrass.get(126).getX(),arrGrass.get(126).getY(), 4);
-        apple = new Apple(bmApple, arrGrass.get(randomApple()[0]).getX(), arrGrass.get(randomApple()[1]).getY());
+        apple = new Object(bmApple, arrGrass.get(objectPlacementRandom()[0]).getX(), arrGrass.get(objectPlacementRandom()[1]).getY());
         score = 0;
     }
 }
