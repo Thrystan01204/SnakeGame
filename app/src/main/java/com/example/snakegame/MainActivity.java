@@ -32,7 +32,10 @@ public class MainActivity extends AppCompatActivity {
         txt_score = findViewById(R.id.txt_score);
         txt_best_score = findViewById(R.id.txt_best_score);
         dialogScore();
+
+
     }
+
 
     private void dialogScore() {
         int bestScore = 0;

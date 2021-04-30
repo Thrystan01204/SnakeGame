@@ -78,7 +78,6 @@ public class GameView extends View {
             @Override
             public void run() {
                 invalidate();
-
             }
         };
         if(Build.VERSION.SDK_INT>=21){
@@ -98,8 +97,8 @@ public class GameView extends View {
                 loadedsound = true;
             }
         });
-        soundEat = this.soundPool.load(context, R.raw.eat, 1);
-        soundDie = this.soundPool.load(context, R.raw.die, 1);
+        soundEat = this.soundPool.load(context, R.raw.eating_voice, 1);
+        soundDie = this.soundPool.load(context, R.raw.dying_voice, 1);
     }
 
     private int[] objectPlacementRandom(){
@@ -194,6 +193,7 @@ public class GameView extends View {
                     gameOver();
                 }
             }
+
         }
         snake.drawSnake(canvas);
         apple.draw(canvas);
@@ -217,7 +217,7 @@ public class GameView extends View {
                 MainActivity.txt_best_score.setText(bestScore+"");
             }
         }
-        handler.postDelayed(r, 100);
+
 
         //Lorsque le serpent passe sur un stop, gameover
         if(snake.getArrPartSnake().get(0).getrBody().intersect(stop.getR())){
@@ -227,13 +227,8 @@ public class GameView extends View {
             }
             gameOver();
         }
-        Timer timer = new Timer();
 
-        timer.schedule( new TimerTask() {
-            public void run() {
-                stop.reset(arrGrass.get(objectPlacementRandom()[0]).getX(), arrGrass.get(objectPlacementRandom()[1]).getY());
-            }
-        }, 0, 5000);
+        handler.postDelayed(r, 100);
     }
 
 
