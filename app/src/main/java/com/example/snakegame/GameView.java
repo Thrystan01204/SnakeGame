@@ -20,6 +20,8 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class GameView extends View {
     private Bitmap bmGrass1, bmGrass2, bmSnake1, bmApple, bmStop;
@@ -76,6 +78,7 @@ public class GameView extends View {
             @Override
             public void run() {
                 invalidate();
+
             }
         };
         if(Build.VERSION.SDK_INT>=21){
@@ -98,7 +101,6 @@ public class GameView extends View {
         soundEat = this.soundPool.load(context, R.raw.eat, 1);
         soundDie = this.soundPool.load(context, R.raw.die, 1);
     }
-
 
     private int[] objectPlacementRandom(){
         int []xy = new int[2];
@@ -175,7 +177,6 @@ public class GameView extends View {
         for(int i = 0; i < arrGrass.size(); i++){
             canvas.drawBitmap(arrGrass.get(i).getBm(), arrGrass.get(i).getX(), arrGrass.get(i).getY(), null);
         }
-
         // Si on joue :
         // On update le snake.
         // On vérifie que la tête n'est pas sortie de la zone de jeu.
@@ -226,8 +227,15 @@ public class GameView extends View {
             }
             gameOver();
         }
+        Timer timer = new Timer();
 
+        timer.schedule( new TimerTask() {
+            public void run() {
+                stop.reset(arrGrass.get(objectPlacementRandom()[0]).getX(), arrGrass.get(objectPlacementRandom()[1]).getY());
+            }
+        }, 0, 5000);
     }
+
 
     // On arrête le jeu when gameover reached and we load sound
     private void gameOver() {
@@ -254,4 +262,6 @@ public class GameView extends View {
         apple = new Object(bmApple, arrGrass.get(objectPlacementRandom()[0]).getX(), arrGrass.get(objectPlacementRandom()[1]).getY());
         score = 0;
     }
+
+
 }
