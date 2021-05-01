@@ -210,6 +210,7 @@ public class GameView extends View {
             //Update du bestScore
             if(score > bestScore){
                 bestScore = score;
+                MainActivity.scores.add(bestScore);
                 SharedPreferences sp = context.getSharedPreferences("gamesetting", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sp.edit();
                 editor.putInt("bestscore", bestScore);

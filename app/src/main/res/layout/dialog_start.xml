@@ -107,4 +107,29 @@
             </LinearLayout>
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_btn_scores"
+        android:layout_below="@+id/cv_score"
+        android:layout_marginTop="70dp"
+        app:cardCornerRadius="10dp"
+        android:elevation="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:id="@+id/rl_score"
+            android:background="#000E67"
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+                <TextView
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="5dp"
+                    android:text="Best scores"
+                    android:textSize="25sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
 </RelativeLayout>
