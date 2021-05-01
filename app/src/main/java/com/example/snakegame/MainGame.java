@@ -16,7 +16,10 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -33,11 +36,17 @@ public class MainGame extends AppCompatActivity {
     public static Dialog dialogScore;
     private GameView gv;
     public static TextView txt_score, txt_best_score, txt_dialog_score, txt_dialog_best_score;
-    public static ArrayList<Integer> scores = new ArrayList<Integer>();
+    public static ArrayList<String> score;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        score = new ArrayList<String>();
+        try {
+            chargerDonnees();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         DisplayMetrics dm = new DisplayMetrics();
         this.getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -49,10 +58,34 @@ public class MainGame extends AppCompatActivity {
         txt_score = findViewById(R.id.txt_score);
         txt_best_score = findViewById(R.id.txt_best_score);
         dialogScore();
-
-
     }
 
+    // Charge l'historique des parties dans le stockage réservé à l'application
+    public void chargerDonnees() throws IOException {
+        File file = new File(getFilesDir(), "stats.txt");
+        // Si il n'y a pas de sauvegarde on ne charge rien
+        if(!file.exists()) return;
+
+        // Lectures du flux de byte
+        int length = (int) file.length();
+        byte[] bytes = new byte[length];
+        FileInputStream in = new FileInputStream(file);
+        try {
+            in.read(bytes);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            in.close();
+        }
+        // Conversion des bytes en un seul string
+        String contents = new String(bytes);
+
+        // Les stats sont stockées ligne par ligne, on découpe et on ajoute en mémoire
+        String[] data = contents.split("\n");
+        for (int i=0; i < data.length; i++){
+            score.add(data[i]);
+        }
+    }
 
     private void openScore(){
         Intent intent = new Intent(this, ListeBestScore.class);

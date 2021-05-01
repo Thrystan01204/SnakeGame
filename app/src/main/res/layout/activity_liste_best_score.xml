@@ -7,6 +7,20 @@
     tools:context=".ListeBestScore">
 
     <RelativeLayout
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:layout_marginTop="100dp">
+
+        <ListView
+            android:id="@+id/listeScore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </ListView>
+    </RelativeLayout>
+
+    <RelativeLayout
         android:background="#0C2200"
         android:layout_width="match_parent"
         android:layout_height="75dp"
@@ -26,21 +40,4 @@
                 android:layout_height="wrap_content"/>
         </RelativeLayout>
     </RelativeLayout>
-
-
-    <RelativeLayout
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:layout_width="wrap_content"
-        android:layout_height="200dp"
-        android:layout_marginTop="100dp">
-
-        <ListView
-            android:id="@+id/listeScore"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-        </ListView>
-    </RelativeLayout>
-
-
 </RelativeLayout>

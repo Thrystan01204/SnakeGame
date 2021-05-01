@@ -1,6 +1,7 @@
 
 package com.example.snakegame;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -13,17 +14,23 @@ import android.media.SoundPool;
 import android.os.Build;
 import android.os.Handler;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.annotation.Nullable;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class GameView extends View {
+    private static final String tag = "MyActivity";
     private Bitmap bmGrass1, bmGrass2, bmSnake1, bmApple, bmStop;
     private ArrayList<Grass> arrGrass = new ArrayList<>();
     private int w = 12, h=21;
@@ -210,7 +217,9 @@ public class GameView extends View {
             //Update du bestScore
             if(score > bestScore){
                 bestScore = score;
-                MainGame.scores.add(bestScore);
+                if(MainGame.score.add(String.valueOf(bestScore))){
+                    Log.d(tag, "Ok" + MainGame.score.size());
+                }
                 SharedPreferences sp = context.getSharedPreferences("gamesetting", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sp.edit();
                 editor.putInt("bestscore", bestScore);
@@ -232,10 +241,35 @@ public class GameView extends View {
         handler.postDelayed(r, 100);
     }
 
+    public void sauvegarderDonnees() throws IOException {
+        File file = new File(this.context.getFilesDir(), "stats.txt");
+        // Si le fichier exste on le supprime
+        if(file.exists()) file.delete();
+
+        FileOutputStream stream = new FileOutputStream(file);
+        try {
+            // les stats sont stockés ligne par ligne
+            int length = MainGame.score.size();
+            for(int i=0; i < length-1; i++){
+                stream.write((MainGame.score.get(i)+"\n").getBytes());
+            }
+            // Pas de retour à la ligne pour la dernière stat
+            stream.write((MainGame.score.get(length-1)).getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            stream.close();
+        }
+    }
 
     // On arrête le jeu when gameover reached and we load sound
     private void gameOver() {
         isPlaying = false;
+        try {
+            sauvegarderDonnees();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
         MainGame.dialogScore.show();
         MainGame.txt_dialog_best_score.setText(bestScore+"");
         MainGame.txt_dialog_score.setText(score+"");
