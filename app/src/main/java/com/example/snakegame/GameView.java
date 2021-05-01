@@ -43,7 +43,7 @@ public class GameView extends View {
     private boolean move = false;
     private float mx, my;
     public static boolean isPlaying = false;
-    public static int score = 0, bestScore = 0;
+    public static int score = 0, bestScore = 0, oldBestScore = 0;
     private Context context;
     private int soundEat, soundDie;
     private float volume;
@@ -56,6 +56,7 @@ public class GameView extends View {
         SharedPreferences sp = context.getSharedPreferences("gamesetting", Context.MODE_PRIVATE);
         if(sp!=null){
             bestScore = sp.getInt("bestscore",0);
+            oldBestScore = bestScore;
         }
         bmGrass1 = BitmapFactory.decodeResource(this.getResources(), R.drawable.texture_grass_1);
         bmGrass1 = Bitmap.createScaledBitmap(bmGrass1, sizeElementMap, sizeElementMap, true);
@@ -219,9 +220,6 @@ public class GameView extends View {
             //Update du bestScore
             if(score > bestScore){
                 bestScore = score;
-                if(MainGame.score.add(String.valueOf(bestScore))){
-                    Log.d(tag, "Ok" + MainGame.score.size());
-                }
                 SharedPreferences sp = context.getSharedPreferences("gamesetting", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sp.edit();
                 editor.putInt("bestscore", bestScore);
@@ -267,6 +265,9 @@ public class GameView extends View {
     // On arrête le jeu when gameover reached and we load sound
     private void gameOver() {
         isPlaying = false;
+        if(bestScore > oldBestScore){
+            MainGame.score.add(String.valueOf(bestScore));
+        }
         try {
             sauvegarderDonnees();
         } catch (IOException e){
