@@ -7,17 +7,26 @@
     tools:context=".ListeBestScore">
 
     <RelativeLayout
-        android:id="@+id/rl_backGame"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="30dp">
-
-        <TextView
-            android:text="Back to the Game"
+        android:background="#0C2200"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:layout_alignParentBottom="true"
+        android:alpha="0.8">
+        <RelativeLayout
+            android:layout_centerInParent="true"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:id="@+id/rl_backGame">
+
+            <TextView
+                android:text="Back to the Game"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </RelativeLayout>
     </RelativeLayout>
+
 
     <RelativeLayout
         android:layout_centerVertical="true"

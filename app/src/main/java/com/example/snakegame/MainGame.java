@@ -59,49 +59,6 @@ public class MainGame extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void writeToFile(ArrayList<Integer> arrayList, Context context){
-        try {
-            OutputStreamWriter osw = new OutputStreamWriter(context.openFileOutput("score.txt", Context.MODE_PRIVATE));
-            for(int i = 0; i < arrayList.size()- 1; i++){
-                osw.write(arrayList.get(i));
-            }
-
-            osw.close();
-        } catch (IOException error){
-            Log.e("Exception", "File Write failed" + error.toString());
-        }
-    }
-
-    private String readFromFile(Context context) {
-
-        String ret = "";
-
-        try {
-            InputStream inputStream = context.openFileInput("config.txt");
-
-            if ( inputStream != null ) {
-                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-                String receiveString = "";
-                StringBuilder stringBuilder = new StringBuilder();
-
-                while ( (receiveString = bufferedReader.readLine()) != null ) {
-                    stringBuilder.append("\n").append(receiveString);
-                }
-
-                inputStream.close();
-                ret = stringBuilder.toString();
-            }
-        }
-        catch (FileNotFoundException e) {
-            Log.e("login activity", "File not found: " + e.toString());
-        } catch (IOException e) {
-            Log.e("login activity", "Can not read file: " + e.toString());
-        }
-
-        return ret;
-    }
-
     private void dialogScore() {
         int bestScore = 0;
         SharedPreferences sp = this.getSharedPreferences("gamesetting", Context.MODE_PRIVATE);
