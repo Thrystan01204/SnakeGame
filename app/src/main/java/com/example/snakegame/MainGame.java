@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -15,15 +14,9 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
 
@@ -33,15 +26,15 @@ import java.util.ArrayList;
  */
 public class MainGame extends AppCompatActivity {
     public static ImageView img_swipe;
-    public static Dialog dialogScore;
+    public static Dialog dialogDeath;
     private GameView gv;
-    public static TextView txt_score, txt_best_score, txt_dialog_score, txt_dialog_best_score;
+    public static TextView txt_score, txt_best_score;
     public static ArrayList<String> score;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        score = new ArrayList<String>();
+        score = new ArrayList();
         try {
             chargerDonnees();
         } catch (IOException e) {
@@ -57,7 +50,7 @@ public class MainGame extends AppCompatActivity {
         gv = findViewById(R.id.gv);
         txt_score = findViewById(R.id.txt_score);
         txt_best_score = findViewById(R.id.txt_best_score);
-        dialogScore();
+        dialogDeath();
     }
 
     // Charge l'historique des parties dans le stockage réservé à l'application
@@ -87,39 +80,26 @@ public class MainGame extends AppCompatActivity {
         }
     }
 
-    private void dialogScore() {
-        int bestScore = 0;
-        SharedPreferences sp = this.getSharedPreferences("gamesetting", Context.MODE_PRIVATE);
-        if(sp!=null){
-            bestScore = sp.getInt("bestscore",0);
-        }
-        MainGame.txt_best_score.setText(bestScore+"");
-        dialogScore = new Dialog(this);
-        dialogScore.setContentView(R.layout.dialog_start);
-        txt_dialog_score = dialogScore.findViewById(R.id.txt_dialog_score);
-        txt_dialog_best_score = dialogScore.findViewById(R.id.txt_dialog_best_score);
-        txt_dialog_best_score.setText(bestScore + "");
-        dialogScore.setCanceledOnTouchOutside(false);
-        RelativeLayout rl_start = dialogScore.findViewById(R.id.rl_start);
+    private void dialogDeath() {
+        dialogDeath = new Dialog(this);
+        dialogDeath.setContentView(R.layout.dialog_start);
+        dialogDeath.setCanceledOnTouchOutside(false);
+        RelativeLayout rl_start = dialogDeath.findViewById(R.id.rl_start);
         rl_start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 img_swipe.setVisibility(View.VISIBLE);
                 gv.reset();
-                dialogScore.dismiss();
+                dialogDeath.dismiss();
             }
         });
-        RelativeLayout rl_scores = dialogScore.findViewById(R.id.rl_score);
-        rl_scores.setOnClickListener(new View.OnClickListener(){
+        RelativeLayout rl_menu = dialogDeath.findViewById(R.id.rl_menu);
+        rl_menu.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                openMenu();
+                finish();
             }
         });
-        dialogScore.show();
-    }
-    public void openMenu(){
-        Intent intent = new Intent(this,MainActivity.class);
-        startActivity(intent);
+        dialogDeath.show();
     }
 }

@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <androidx.cardview.widget.CardView
-        android:id="@+id/cv_score"
+        android:id="@+id/cv_death"
         app:cardCornerRadius="10dp"
         android:elevation="10dp"
         android:layout_centerHorizontal="true"
@@ -20,62 +20,23 @@
             android:layout_height="200dp"
             android:weightSum="2"
             android:orientation="horizontal">
-            <RelativeLayout
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent">
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_centerInParent="true">
 
-                    <ImageView
-                        android:id="@+id/imageView4"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        app:srcCompat="@drawable/ze_pom" />
-
-                    <TextView
-                        android:id="@+id/txt_dialog_score"
-                        android:textSize="25sp"
-                        android:text="0"
-                        android:textColor="#ffffff"
-                        android:layout_gravity="center"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                </LinearLayout>
-            </RelativeLayout>
-            <RelativeLayout
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent">
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_centerInParent="true">
-                    <TextView
-                        android:id="@+id/txt_hscore"
-                        android:text="Back to Menu"
-                        android:layout_width="65dp"
-                        android:layout_height="60dp"
-                        android:scaleType="fitXY"/>
-                    <TextView
-                        android:id="@+id/txt_dialog_best_score"
-                        android:textSize="25sp"
-                        android:text="0"
-                        android:textColor="#ffffff"
-                        android:layout_gravity="center"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                </LinearLayout>
-            </RelativeLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="25dp"
+                android:layout_marginLeft="100dp"
+                android:text="YOU DIED !!!"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="25sp" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_btn_start"
-        android:layout_below="@+id/cv_score"
+        android:layout_below="@+id/cv_death"
         android:layout_marginTop="10dp"
         app:cardCornerRadius="10dp"
         android:elevation="10dp"
@@ -93,14 +54,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-                <ImageView
-                    android:id="@+id/txt"
-                    android:src="@drawable/ic_baseline_play_arrow_24"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"/>
                 <TextView
                     android:layout_marginLeft="5dp"
-                    android:text="Play"
+                    android:text="Try Again"
                     android:textSize="25sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
@@ -108,8 +64,8 @@
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
     <androidx.cardview.widget.CardView
-        android:id="@+id/cv_btn_scores"
-        android:layout_below="@+id/cv_score"
+        android:id="@+id/cv_btn_menu"
+        android:layout_below="@+id/cv_death"
         android:layout_marginTop="70dp"
         app:cardCornerRadius="10dp"
         android:elevation="10dp"
@@ -117,7 +73,7 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content">
         <RelativeLayout
-            android:id="@+id/rl_score"
+            android:id="@+id/rl_menu"
             android:background="#000E67"
             android:padding="10dp"
             android:layout_width="match_parent"
@@ -125,7 +81,7 @@
                 <TextView
                     android:layout_centerHorizontal="true"
                     android:layout_marginLeft="5dp"
-                    android:text="Best scores"
+                    android:text="Back to menu"
                     android:textSize="25sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>

@@ -1,16 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rl"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#45F43E"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:background="#45F43E">
+    android:id="@+id/rl"
+
+    <ImageView
+        android:id="@+id/serpent1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="250dp"
+        app:srcCompat="@drawable/group1" />
+
+    <ImageView
+        android:id="@+id/serpent2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="170dp"
+        app:srcCompat="@drawable/group2" />
+
+    <ImageView
+        android:id="@+id/serpent3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        app:srcCompat="@drawable/group3" />
+
+    <ImageView
+        android:id="@+id/serpent4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="100dp"
+        app:srcCompat="@drawable/group5" />
+
+    <ImageView
+        android:id="@+id/serpent5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        app:srcCompat="@drawable/group6" />
+
+    <ImageView
+        android:id="@+id/serpent6"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/group7" />
+
+    <ImageView
+        android:id="@+id/serpent7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        app:srcCompat="@drawable/group8" />
+
+    <ImageView
+        android:id="@+id/serpent8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="200dp"
+        app:srcCompat="@drawable/group10" />
+
+    <RelativeLayout
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="200dp"
+        android:layout_marginTop="200dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/bestscore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:text="Best scores:"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/bestscore_"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="150dp"
+            android:text=""
+            android:textSize="25sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="200dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/score_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:text="Scores :"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/score_"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="120dp"
+            android:text=""
+            android:textSize="25sp" />
+
+    </RelativeLayout>
 
     <Button
         android:id="@+id/button_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="155dp"
-        android:layout_marginTop="250dp"
+        android:layout_marginTop="350dp"
         android:text="start" />
 
     <Button
@@ -20,4 +138,6 @@
         android:layout_marginLeft="135dp"
         android:layout_marginTop="400dp"
         android:text="Leaderboard" />
+
+
 </RelativeLayout>

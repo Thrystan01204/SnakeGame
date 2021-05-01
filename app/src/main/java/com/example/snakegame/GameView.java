@@ -56,7 +56,7 @@ public class GameView extends View {
         SharedPreferences sp = context.getSharedPreferences("gamesetting", Context.MODE_PRIVATE);
         if(sp!=null){
             bestScore = sp.getInt("bestscore",0);
-            oldBestScore = bestScore;
+            oldBestScore = sp.getInt("bestscore",0);
         }
         bmGrass1 = BitmapFactory.decodeResource(this.getResources(), R.drawable.texture_grass_1);
         bmGrass1 = Bitmap.createScaledBitmap(bmGrass1, sizeElementMap, sizeElementMap, true);
@@ -107,7 +107,7 @@ public class GameView extends View {
         });
         soundEat = this.soundPool.load(context, R.raw.eating_voice, 1);
         soundDie = this.soundPool.load(context, R.raw.dying_voice, 1);
-
+        //Using timer to get the stop reload every 5 secondes
         Timer timer = new Timer();
         timer.schedule(new stopload(), 0, 5000);
     }
@@ -138,7 +138,7 @@ public class GameView extends View {
         }
         return xy;
     }
-    //We detectation the moment when 
+    //We detectation the swip
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         int a = event.getActionMasked();
@@ -224,7 +224,9 @@ public class GameView extends View {
             apple.reset(arrGrass.get(objectPlacementRandom()[0]).getX(), arrGrass.get(objectPlacementRandom()[1]).getY());
             snake.addPart();
             score++;
+            //MainActivity.score.setText(score+"");
             MainGame.txt_score.setText(score+"");
+            MainActivity.score.setText(score+"");
             //Update du bestScore
             if(score > bestScore){
                 bestScore = score;
@@ -232,6 +234,7 @@ public class GameView extends View {
                 SharedPreferences.Editor editor = sp.edit();
                 editor.putInt("bestscore", bestScore);
                 editor.apply();
+                MainActivity.bestscore.setText(bestScore+"");
                 MainGame.txt_best_score.setText(bestScore+"");
             }
         }
@@ -244,7 +247,6 @@ public class GameView extends View {
             }
             gameOver();
         }
-
         handler.postDelayed(r, 100);
     }
 
@@ -269,7 +271,7 @@ public class GameView extends View {
         }
     }
 
-    // On arrête le jeu when gameover reached and we load sound
+    // On arrête le jeu when GameOver reached and we load sound
     private void gameOver() {
         isPlaying = false;
         if(bestScore > oldBestScore){
@@ -280,14 +282,21 @@ public class GameView extends View {
         } catch (IOException e){
             e.printStackTrace();
         }
-        MainGame.dialogScore.show();
+        MainGame.dialogDeath.show();
+        //Load l'écran de mort
+        //MainGame.dialogDeath.show();
+        /*
         MainGame.txt_dialog_best_score.setText(bestScore+"");
-        MainGame.txt_dialog_score.setText(score+"");
+        MainGame.txt_dialog_score.setText(score+"");*/
 
+
+        //Load le son de mort
         if(loadedsound){
             int streamId = this.soundPool.play(this.soundDie, (float)0.5, (float)0.5, 1, 0, 1f);
         }
     }
+
+    //Reset la partie, snake, score
     public void reset(){
         for(int i = 0; i < h; i++){
             for (int j = 0; j < w; j++){
