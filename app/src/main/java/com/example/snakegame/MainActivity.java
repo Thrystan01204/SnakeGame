@@ -18,6 +18,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -64,12 +65,14 @@ public class MainActivity extends AppCompatActivity {
         try {
             OutputStreamWriter osw = new OutputStreamWriter(context.openFileOutput("score.txt", Context.MODE_PRIVATE));
             for(int i = 0; i < arrayList.size()- 1; i++){
-                osw.write(arrayList.get(i));
+                osw.write(arrayList.get(i).toString() + "\n");
             }
 
             osw.close();
         } catch (IOException error){
             Log.e("Exception", "File Write failed" + error.toString());
+            new File("score.txt");
+            writeToFile(arrayList, context);
         }
     }
 
@@ -78,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         String ret = "";
 
         try {
-            InputStream inputStream = context.openFileInput("config.txt");
+            InputStream inputStream = context.openFileInput("score.txt");
 
             if ( inputStream != null ) {
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
