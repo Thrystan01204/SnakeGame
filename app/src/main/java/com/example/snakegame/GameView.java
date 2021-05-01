@@ -50,9 +50,9 @@ public class GameView extends View {
         if(sp!=null){
             bestScore = sp.getInt("bestscore",0);
         }
-        bmGrass1 = BitmapFactory.decodeResource(this.getResources(), R.drawable.grass);
+        bmGrass1 = BitmapFactory.decodeResource(this.getResources(), R.drawable.texture_grass_1);
         bmGrass1 = Bitmap.createScaledBitmap(bmGrass1, sizeElementMap, sizeElementMap, true);
-        bmGrass2 = BitmapFactory.decodeResource(this.getResources(), R.drawable.grass03);
+        bmGrass2 = BitmapFactory.decodeResource(this.getResources(), R.drawable.texture_grass_2);
         bmGrass2 = Bitmap.createScaledBitmap(bmGrass2, sizeElementMap, sizeElementMap, true);
         bmSnake1 = BitmapFactory.decodeResource(this.getResources(), R.drawable.snake1);
         bmSnake1 = Bitmap.createScaledBitmap(bmSnake1, 14*sizeElementMap, sizeElementMap, true);
