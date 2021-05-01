@@ -87,11 +87,6 @@ public class MainGame extends AppCompatActivity {
         }
     }
 
-    private void openScore(){
-        Intent intent = new Intent(this, ListeBestScore.class);
-        startActivity(intent);
-    }
-
     private void dialogScore() {
         int bestScore = 0;
         SharedPreferences sp = this.getSharedPreferences("gamesetting", Context.MODE_PRIVATE);
@@ -118,10 +113,13 @@ public class MainGame extends AppCompatActivity {
         rl_scores.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                openScore();
+                openMenu();
             }
         });
         dialogScore.show();
     }
+    public void openMenu(){
+        Intent intent = new Intent(this,MainActivity.class);
+        startActivity(intent);
+    }
 }
-

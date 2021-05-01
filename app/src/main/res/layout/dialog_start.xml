@@ -57,7 +57,7 @@
                     android:layout_centerInParent="true">
                     <TextView
                         android:id="@+id/txt_hscore"
-                        android:text="Highscore"
+                        android:text="Back to Menu"
                         android:layout_width="65dp"
                         android:layout_height="60dp"
                         android:scaleType="fitXY"/>

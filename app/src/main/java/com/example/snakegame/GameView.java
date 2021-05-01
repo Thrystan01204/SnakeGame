@@ -108,9 +108,16 @@ public class GameView extends View {
         soundEat = this.soundPool.load(context, R.raw.eating_voice, 1);
         soundDie = this.soundPool.load(context, R.raw.dying_voice, 1);
 
-
+        Timer timer = new Timer();
+        timer.schedule(new stopload(), 0, 5000);
     }
 
+    //Creating a class to reload the stop every 5 seconds
+    class stopload extends TimerTask {
+        public void run() {
+            stop.reset(arrGrass.get(objectPlacementRandom()[0]).getX(), arrGrass.get(objectPlacementRandom()[1]).getY());
+        }
+    }
     private int[] objectPlacementRandom(){
         int []xy = new int[2];
         Random r = new Random();
@@ -142,12 +149,14 @@ public class GameView extends View {
                     my = event.getY();
                     move = true;
                 }else{
+                    //Test si le serpent va vers ne va pas a droite pour aller a gauche
                     if(mx - event.getX() > 100 && !snake.isMove_right()){
                         mx = event.getX();
                         my = event.getY();
                         this.snake.setMove_left(true);
                         isPlaying = true;
                         MainGame.img_swipe.setVisibility((INVISIBLE));
+                        //same for left
                     }else if(event.getX() - mx > 100 &&!snake.isMove_left()){
                         mx = event.getX();
                         my = event.getY();
@@ -203,7 +212,6 @@ public class GameView extends View {
                     gameOver();
                 }
             }
-
         }
         snake.drawSnake(canvas);
         apple.draw(canvas);
@@ -227,7 +235,6 @@ public class GameView extends View {
                 MainGame.txt_best_score.setText(bestScore+"");
             }
         }
-
 
         //Lorsque le serpent passe sur un stop, gameover
         if(snake.getArrPartSnake().get(0).getrBody().intersect(stop.getR())){
@@ -281,7 +288,6 @@ public class GameView extends View {
             int streamId = this.soundPool.play(this.soundDie, (float)0.5, (float)0.5, 1, 0, 1f);
         }
     }
-
     public void reset(){
         for(int i = 0; i < h; i++){
             for (int j = 0; j < w; j++){

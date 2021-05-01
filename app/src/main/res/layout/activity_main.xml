@@ -9,9 +9,15 @@
         android:id="@+id/button_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="150dp"
-        android:layout_marginRight="150dp"
+        android:layout_marginLeft="155dp"
         android:layout_marginTop="250dp"
         android:text="start" />
 
+    <Button
+        android:id="@+id/button_learderboard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="135dp"
+        android:layout_marginTop="400dp"
+        android:text="Leaderboard" />
 </RelativeLayout>
