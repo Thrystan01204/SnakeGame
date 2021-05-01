@@ -106,6 +106,8 @@ public class GameView extends View {
         });
         soundEat = this.soundPool.load(context, R.raw.eating_voice, 1);
         soundDie = this.soundPool.load(context, R.raw.dying_voice, 1);
+
+
     }
 
     private int[] objectPlacementRandom(){
